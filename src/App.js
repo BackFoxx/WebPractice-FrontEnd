@@ -13,14 +13,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [
-        { id: "0", title: "Hello World1", done: true },
-        { id: "1", title: "Hello World23", done: false },
-      ],
+      items: [ ],
     };
   }
 
-  //1. 함수 추가
+  //1. Add 함수 추가
   add = (item) => {
     const thisItems = this.state.items;
     item.id = "ID-" + thisItems.length; // key를 위한 id 추가
@@ -30,12 +27,23 @@ class App extends React.Component {
     console.log("items : ",this.state.items);
   }
 
+  //1. delete 함수 추가
+  delete = (item) => {
+    const thisItems = this.state.items;
+      console.log("Before Update Items : ", this.state.items)
+    const newItems = thisItems.filter(e => e.id !== item.id);
+    this.setState({ items: newItems }, () => {
+      //디버깅 콜백
+      console.log("Update Items : ", this.state.items)
+    });
+  }
+
   render() {
     var todoItems = this.state.items.length > 0 && (
       <Paper style={{ margin: 16 }}>
         <List>
           {this.state.items.map((item, idx) => (
-            <Todo item={item} key={item.id} />
+            <Todo item={item} key={item.id} delete={this.delete} />
           ))}  
         </List>
       </Paper>

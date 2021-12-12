@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import InputBase from "@material-ui/core/InputBase";
-import Checkbox from "@material-ui/core/Checkbox";
+import { ListItem, ListItemText, InputBase, Checkbox, ListItemSecondaryAction, IconButton } from "@material-ui/core";
+import DeleteOutlined from "@material-ui/icons/DeleteOutlined/";
 
 
 // Todo 리스트
@@ -12,7 +10,12 @@ class Todo extends Component {
         super(props);
         this.state = { item: props.item };
         //state는 리액트가 관리하는 프로젝트다. 추후에 변경할 수 있는 변수를 관리한다.
+        this.delete = props.delete;
       }
+    
+    deleteEventHandler = () => {
+      this.delete(this.state.item)
+    }
     
     render() {
         const item = this.state.item;
@@ -32,6 +35,14 @@ class Todo extends Component {
                 multiline={true}
               />
             </ListItemText>
+
+            <ListItemSecondaryAction>
+              <IconButton 
+                aria-label="Delete Todo"
+                onClick={this.deleteEventHandler}>
+                <DeleteOutlined />
+              </IconButton>
+            </ListItemSecondaryAction>
             </ListItem>
         );
     }

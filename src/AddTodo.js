@@ -1,8 +1,5 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
+import { TextField, Paper, Button, Grid } from "@material-ui/core";
 
 //사용자의 입력을 저장할 오브젝트
 class AddTodo extends React.Component {
