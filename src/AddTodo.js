@@ -38,7 +38,7 @@ class AddTodo extends React.Component {
                     <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
                         <TextField 
                         placeholder="Add Todo here" 
-                        fullwidth
+                        fullWidth={true}
                         onChange={this.onInputChange}
                         //이벤트 핸들러 함수로 onInputChange를 연결한다.
                         value={this.state.item.title}
@@ -46,7 +46,7 @@ class AddTodo extends React.Component {
                     </Grid>
                     <Grid xs={1} md={1} item>
                         <Button 
-                            fullwidth 
+                            fullWidth={true}
                             color="secondary" 
                             variant="outlined"
                             onClick={this.onButttonClick}>
