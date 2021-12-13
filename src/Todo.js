@@ -11,6 +11,7 @@ class Todo extends Component {
         this.state = { item: props.item, readOnly: true };
         //state는 리액트가 관리하는 프로젝트다. 추후에 변경할 수 있는 변수를 관리한다.
         this.delete = props.delete;
+        this.update = props.update;
       }
     
     //App.js에서 delete 함수 가져오기
@@ -30,6 +31,7 @@ class Todo extends Component {
     enterKeyEventHandler = (e) => {
       if (e.key === 'Enter') {
           this.setState({ readOnly: true });
+          this.update(this.state.item);
       }
     };
 
@@ -45,6 +47,7 @@ class Todo extends Component {
       const thisItem = this.state.item;
       thisItem.done = !thisItem.done;
       this.setState({ item: thisItem });
+      this.update(this.state.item);
     }
 
     render() {
