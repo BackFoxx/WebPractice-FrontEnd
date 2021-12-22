@@ -21,7 +21,9 @@ class App extends React.Component {
   componentDidMount() {
       call("/todo", "GET", null).then((response) =>
         this.setState({ items: response.data })
-      );
+      ).catch(function(error) {
+        console.log(error.response.status);
+      })
     }
 
   //1. Add 함수 추가
