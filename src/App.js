@@ -20,31 +20,33 @@ class App extends React.Component {
 
   componentDidMount() {
       call("/todo", "get", null).then((response) =>
-        this.setState({ items: response.data })
+        this.setState({ items: response.data.data })
       )
     }
 
   //1. Add 함수 추가
   add = (item) => {
     call("/todo", "POST", item).then((response) =>
-      this.setState({ items: response.data })
+      this.setState({ items: response.data.data })
       );
   };
 
   //1. delete 함수 추가
   delete = (item) => {
     call("/todo", "DELETE", item).then((response) =>
-      this.setState({ items: response.data })
+      this.setState({ items: response.data.data })
       );
   };
 
   update = (item) => {
     call("/todo", "PUT", item).then((response) =>
-      this.setState({ items: response.data })
+      this.setState({ items: response.data.data })
       );
   };
 
   render() {
+    
+
     var todoItems = this.state.items.length > 0 && (
       <Paper style={{ margin: 16 }}>
         <List>
@@ -58,7 +60,7 @@ class App extends React.Component {
         </List>
       </Paper>
     );
-
+    
     return (
       <div className="App">
         <Container maxWidth="md">

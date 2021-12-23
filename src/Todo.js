@@ -52,6 +52,7 @@ class Todo extends Component {
 
     render() {
         const item = this.state.item;
+        console.log("Todo : " +this.state.item);
         return (
             <ListItem>
             <Checkbox checked={item.done} onChange={this.checkboxEventHandler} />

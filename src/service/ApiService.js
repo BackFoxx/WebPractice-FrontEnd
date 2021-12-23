@@ -9,30 +9,36 @@ export function call(api, method, request) {
     return axios({
         method: `${method}`,
         url: `${API_BASE_URL}`+`${api}`,
-        data: request
+        data: request,
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
     })
     .then((response) => {
-        console.log(response)
-        if(!response.ok) {
-            return Promise.reject(response);
-        }
         return response;
     })
     .catch((error) => {
-        console.log(error.status);
-        if(error.status === 403) {
-            window.location.href = "/login";
+        if(error.status === undefined) {
+            if(error.response.status === 403) {
+                window.location.href = "/login";
+            }
+        } else {
+            if(error.status === 403) {
+                window.location.href = "/login";
+            }
         }
     })
 }
 
 export function signin(userDTO) {
-    const res = call("/auth/signin", "post", userDTO);
-    return (function() {
-        console.log(res);
-        if(res.token) {
-            console.log("성공");
-            localStorage.setItem("ACCESS_TOKEN", res.token);
-            window.location.href = "/";
-    }})
+    return (
+        call("/auth/signin", "post", userDTO).then((res) => {
+        if(res.data.token !== null) {
+            localStorage.setItem(ACCESS_TOKEN, res.data.token);
+            window.location.href ="/";
+        }
+        }).catch((error) => {
+            alert("로그인 실패");
+            window.location.href = "/login";
+        } ))
 }
