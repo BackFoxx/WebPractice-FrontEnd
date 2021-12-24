@@ -30,6 +30,10 @@ export function call(api, method, request) {
     })
 }
 
+export function signup(userDTO) {
+    return call("/auth/signup", "post", userDTO);
+}
+
 export function signin(userDTO) {
     return (
         call("/auth/signin", "post", userDTO).then((res) => {
